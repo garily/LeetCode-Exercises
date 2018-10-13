@@ -1,7 +1,7 @@
 package SymmetricTree;
 import java.util.Stack;
 
-// Recursive solution
+// Iterative solution
 
 /**
  * Definition for a binary tree node.
@@ -19,42 +19,23 @@ class Solution {
         if (root.right == null) return false;
         if (root.left.val != root.right.val) return false;
 
-        Stack<TreeNode> leftStack = new Stack<>();
-        Stack<TreeNode> rightStack = new Stack<>();
+        Stack<TreeNode> stack = new Stack<>();
 
-        leftInPush(leftStack, root.left);
-        rightInPush(rightStack, root.right);
+        stack.push(root.left);
+        stack.push(root.right);
 
-        while (!leftStack.isEmpty() && !rightStack.isEmpty()) {
-            if (leftStack.pop().val != rightStack.pop().val)
-                return false;
-        }
-        return leftStack.isEmpty() && rightStack.isEmpty();
-    }
+        while (!stack.isEmpty()) {
+            TreeNode nodeR = stack.pop();
+            TreeNode nodeL = stack.pop();
+            if (nodeL == null && nodeR == null) continue;
+            if (nodeL == null || nodeR == null) return false;
+            if (nodeL.val != nodeR.val) return false;
 
-    void rightInPush(Stack stack, TreeNode node) {
-        if (stack == null) return;
-        if (node != null) {
-            rightInPush(stack, node.right);
-            stack.push(node);
-            rightInPush(stack, node.left);
+            stack.push(nodeL.left);
+            stack.push(nodeR.right);
+            stack.push(nodeL.right);
+            stack.push(nodeR.left);
         }
-        else {
-            //mark empty
-            stack.push(new TreeNode(0));
-        }
-    }
-
-    void leftInPush(Stack stack, TreeNode node) {
-        if (stack == null) return;
-        if (node != null) {
-            leftInPush(stack, node.left);
-            stack.push(node);
-            leftInPush(stack, node.right);
-        }
-        else {
-            //mark empty
-            stack.push(new TreeNode(0));
-        }
+        return stack.size() == 0;
     }
 }
