@@ -1,5 +1,5 @@
-//Complexity Average: NlogN + N^2
-  Complexity worst: NlogN + N^2logN
+// Complexity Average: NlogN + N^2
+// Complexity worst: NlogN + N^2logN
 class Solution {
     public List<List<Integer>> threeSum(int[] nums) {
         if (nums.length <= 2) return new ArrayList<>();
