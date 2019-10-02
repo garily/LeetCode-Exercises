@@ -7,13 +7,6 @@ class Solution {
         boolean[][] pacific = new boolean[matrix.length][matrix[0].length];
         boolean[][] atlantic = new boolean[matrix.length][matrix[0].length];
         
-        for (int r = 0; r < matrix.length; r++) {
-            for (int c = 0; c < matrix[0].length; c++) {
-                if (r == 0 || c == 0) pacific[r][c] = true;
-                if (r == matrix.length - 1 || c == matrix[0].length - 1) atlantic[r][c] = true;
-            }
-        }
-        
         Queue<Integer> toVisit = new LinkedList<>();
         boolean[][] visited = new boolean[matrix.length][matrix[0].length];
         
