@@ -10,7 +10,7 @@ class Solution {
         for (int i = 0; i < nums.length; i++) {
             for (int j = 0; j <= sum; j++) {
                 int someSum = j + 2 * nums[i];
-                if (someSum <= sum && sums[someSum] > 0) {
+                if (someSum <= sum) {
                     sums[j] += sums[someSum];
                 }
             }
